@@ -36,8 +36,6 @@ include $prefix."../include/functions_stats.php";
 // INCLUDE ADMIN-SPECIFIC CLASS/FUNCTION FILES
 include $prefix."../include/Admin.class.php";
 
-require_once $prefix.'../include/License.class.php';
-
 // INITIATE DATABASE CONNECTION
 $database = new PHPS_Database($databaseHost, $databaseUsername, $databasePassword, $databaseName);
 
@@ -50,9 +48,6 @@ $global_lang = $setting[setting_lang_default];
 include $prefix."../lang/lang.".$global_lang.".php";
 include $prefix."../lang/lang.".$global_lang.".admin.php";
 
-$license = new License();
-$license->setLicFilePath($prefix.'../include/');
-
 // ENSURE NO SQL INJECTIONS THROUGH POST OR GET ARRAYS
 $_POST = security($_POST);
 $_GET = security($_GET);
@@ -61,28 +56,7 @@ $_COOKIE = security($_COOKIE);
 // INITIALIZE ERROR MESSAGE VAR
 $error_message = "";
 
-if($_POST["task"] == "dovalidate") {
-    if(!$license->acceptLicense($_POST['key'])) {
-        $error_message = "Wrong license key";
-        $smarty->assign('error_message', $error_message);
-    }
-}
-
-if($license->check()) {
-    $valid = 1;
-} else {
-    $valid = 1;
-}
-
-//check the license
-//if(!$license->check()) {
-//	$page = "AdminError";
-//    $smarty->assign('error_header', $Admin[1024]);
-//    $smarty->assign('error_message', $Admin[1025]);
-//    $smarty->assign('error_submit', $Admin[1026]);
-//	$smarty->display($page . '.tpl');
-//    exit();
-//}
+$valid = 1;
 
 // CREATE URL CLASS
 $url = new PHPS_Url();
@@ -117,7 +91,7 @@ $level_menu[] = Array('page' => 'AdminLevelsMessagesettings',
 $global_plugins = Array();
 $plugins = $database->database_query("SELECT plugin_type, plugin_pages_level FROM phps_plugins ORDER BY plugin_id ASC");
 while($plugin_info = $database->database_fetch_assoc($plugins)) {
-  if(file_exists("AdminHeader".$plugin_info[plugin_type].".php")) { include "AdminHeader".$plugin_info[plugin_type].".php"; } 
+  if(file_exists("AdminHeader".$plugin_info[plugin_type].".php")) { include "AdminHeader".$plugin_info[plugin_type].".php"; }
   $global_plugins[] = $plugin_info[plugin_type];
 
   $plugin_pages_level = explode("<~!~>", $plugin_info[plugin_pages_level]);
