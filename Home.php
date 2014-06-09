@@ -84,10 +84,15 @@ $total_friends = $database->database_num_rows($database->database_query("SELECT 
 // get total comments (loop through the comments table)
 $total_comments = 0;
 $comment_tables = $database->database_query("SHOW TABLES FROM `$database_name` LIKE 'se_%comments'");
-while($table_info = $database->database_fetch_array($comment_tables)) {
-  $comment_type = strrev(substr(strrev(substr($table_info[0], 3)), 8));
-  $total_comments += $database->database_num_rows($database->database_query("SELECT ".$comment_type."comment_id FROM se_".$comment_type."comments"));
+if ($comment_tables->database_num_rows)
+{
+  while($table_info = $database->database_fetch_array($comment_tables))
+  {
+    $comment_type = strrev(substr(strrev(substr($table_info[0], 3)), 8));
+    $total_comments += $database->database_num_rows($database->database_query("SELECT ".$comment_type."comment_id FROM se_".$comment_type."comments"));
+  }
 }
+
 
 $smarty->assign('page', $page);
 $smarty->assign('prev_email', $prev_email);
