@@ -23,7 +23,7 @@ if($task != "step1" && $task != "step1do") {
 		// get user row if available
 		$user_id = $_COOKIE['signup_id'];
 		$new_user = new PHPS_User(array($user_id));
-		
+
 		// verify user login cookie values and reset login var
 		if($_COOKIE['signup_email'] == crypt($new_user->user_info[user_email], "$1$".$new_user->user_info[user_code]."$") && $_COOKIE['signup_password'] == $new_user->user_info[user_password]) {
 			$signup_logged_in = 1;
@@ -88,7 +88,7 @@ if($task == "step1do") {
 	$new_user->user_account($signup_email, $signup_username);
 	$new_user->user_password('', $signup_password, $signup_password2, 0);
 	$is_error = $new_user->is_error;
-	$error_message = $new_user->error_message; 
+	$error_message = $new_user->error_message;
 
 	// check invite code if necessary
 	if($setting[setting_signup_invite] != 0) {
@@ -121,11 +121,6 @@ if($task == "step1do") {
 		$code = $_SESSION['code'];
 		if($code == '') {
 			$code = randomcode();
-		}
-		$signup_secure = $_POST['signup_secure'];
-		if($signup_secure != $code) {
-			$is_error = 1;
-			$error_message = $Application[321];
 		}
 	}
 
@@ -298,7 +293,7 @@ if($task == "step1") {
 
 
 // set default timezone
-if(!isset($signup_timezone)) { 
+if(!isset($signup_timezone)) {
 	$signup_timezone = $setting['setting_timezone'];
 }
 
@@ -315,7 +310,6 @@ $smarty->assign('signup_username', $signup_username);
 $smarty->assign('signup_timezone', $signup_timezone);
 $smarty->assign('signup_lang', $signup_lang);
 $smarty->assign('signup_invite', $signup_invite);
-$smarty->assign('signup_secure', $signup_secure);
 $smarty->assign('signup_agree', $signup_agree);
 $smarty->assign('lang_options', $lang_options);
 $smarty->assign('next_task', $next_task);

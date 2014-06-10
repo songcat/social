@@ -1,7 +1,7 @@
 <?php
 /**
  * General functions
- * 
+ *
  */
 
 
@@ -11,13 +11,13 @@
  * @param string $url
  */
 function cheader($url) {
-	if(ereg("Microsoft", $_SERVER['SERVER_SOFTWARE'])) {
+	if(preg_match("/Microsoft/", $_SERVER['SERVER_SOFTWARE'])) {
 	  header("Refresh: 0; URL=$url");
 	} else {
 	  header("Location: $url");
 	}
 	exit();
-} 
+}
 
 /**
  * Returns appropriate page vars
@@ -36,8 +36,7 @@ function make_page($total_items, $items_per_page, $p) {
 	$start = ($p - 1) * $items_per_page;
 
 	return array($start, $p, $maxpage);
-
-} 
+}
 
 
 /**
@@ -66,7 +65,7 @@ function randomcode($len="8") {
 	$code = NULL;
 	for($i=0;$i<$len;$i++) {
 	  $char = chr(rand(48,122));
-	  while(!ereg("[a-zA-Z0-9]", $char)) {
+	  while(!preg_match("/[a-zA-Z0-9]/", $char)) {
 	    if($char == $lchar) { continue; }
 	    $char = chr(rand(48,90));
 	  }
@@ -93,18 +92,18 @@ function is_email_address($email) {
 
 /**
  * Represent str_ireplace if not exists
- * 
+ *
  */
 if(!function_exists('str_ireplace')) {
 	function str_ireplace($search, $replace, $subject) {
 		$search = preg_quote($search, "/");
 		return preg_replace("/".$search."/i", $replace, $subject);
 	}
-} 
+}
 
 /**
  * Represent htmlspecialchars_decode if not exists
- * 
+ *
  */
 if(!function_exists('htmlspecialchars_decode')) {
 	function htmlspecialchars_decode($text, $ent_quotes = "") {
@@ -122,7 +121,7 @@ if(!function_exists('htmlspecialchars_decode')) {
  * Represent str_split if not exists
  *
  */
-if(!function_exists('str_split')) { 
+if(!function_exists('str_split')) {
 	function str_split($string, $split_length = 1) {
 		$count = strlen($string);
 		if($split_length < 1) {
@@ -137,7 +136,7 @@ if(!function_exists('str_split')) {
 		  }
 		  return $ret;
 		}
-	}  
+	}
 }
 
 /**
@@ -183,13 +182,13 @@ function link_field_values(&$field_value, $key, $additional) {
 	    if($field_value != "") { $field_value = "<a href='$browse_url'>$field_value</a>"; }
 	  }
 	} else {
-	  if($field_value != "") { 
+	  if($field_value != "") {
 	    $link_to = str_replace("[field_value]", $field_value, $field_link);
-	    $field_value = "<a href='$link_to' target='_blank'>$field_value</a>"; 
+	    $field_value = "<a href='$link_to' target='_blank'>$field_value</a>";
 	  }
 	}
 
-} 
+}
 
 /**
  * Censors word from the string
@@ -206,7 +205,7 @@ function censor($field_value) {
 	  $replace_value = str_pad("", strlen(trim($value)), "*");
 	  $field_value = str_ireplace(trim($value), $replace_value, $field_value);
 	}
- 
+
 	return $field_value;
 
 }
@@ -309,7 +308,7 @@ function user_privacy_levels($privacy_level) {
 	}
 
 	return $privacy;
-} 
+}
 
 /**
  * search through the profile information
@@ -330,10 +329,10 @@ function search_profile($search_text, $total_only, &$search_objects, &$results, 
 
 	$fields = $database->database_query("SELECT field_id, field_type, field_options FROM phps_fields WHERE field_type<>'5' AND (field_dependency<>'0' OR (field_dependency='0' AND (field_browsable='1' OR field_browsable='2')))");
 	$profile_query = "phps_users.user_username LIKE '%$search_text%'";
-    
+
 	// loop over fields
 	while($field_info = $database->database_fetch_assoc($fields)) {
-    
+
 	  // text field or textarea
 	  if($field_info[field_type] == 1 | $field_info[field_type] == 2) {
 	    if($profile_query != "") { $profile_query .= " OR "; }
@@ -414,7 +413,7 @@ function search_profile($search_text, $total_only, &$search_objects, &$results, 
 function getmicrotime() {
 	list($usec, $sec) = explode(" ",microtime());
 	return ((float)$usec + (float)$sec);
-} 
+}
 
 
 
@@ -435,7 +434,7 @@ function ChopText($text, $size = 50) {
             $new_text .= preg_replace('#([^\n\r ]{'. $size .'})#i', '\\1 <br>', $text_2[0]);
         }
         if (!empty($text_2[1])) {
-            $new_text .= '<' . $text_2[1] . '>';  
+            $new_text .= '<' . $text_2[1] . '>';
         }
     }
     return $new_text;

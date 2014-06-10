@@ -19,7 +19,7 @@ class PHPS_User {
 	 *
 	 * @var string
 	 */
-	public $error_message;		
+	public $error_message;
 
 	/**
 	 * We editing an existing user or not
@@ -107,7 +107,7 @@ class PHPS_User {
 
 	/**
 	 * Constructor
-	 * 
+	 *
 	 * @global PHPS_Database $database
 	 * @global array $Application
 	 * @param array $user_unique
@@ -298,7 +298,7 @@ class PHPS_User {
 		// make sure that fields are filled
 		if(str_replace(" ", "", $email) == "" OR str_replace(" ", "", $username) == "") { $this->is_error = 1; $this->error_message = $Application[38]; }
 
-		if(ereg('[^A-Za-z0-9]', $username)) { $this->is_error = 1; $this->error_message = $Application[38]; }
+		if(preg_match('/[^A-Za-z0-9]/', $username)) { $this->is_error = 1; $this->error_message = $Application[38]; }
 
 		// check if name banned / no banned
 		$banned_usernames = explode(",", strtolower($setting[setting_banned_usernames]));
@@ -345,7 +345,7 @@ class PHPS_User {
 		if($check_old == 1 & crypt($password_old, $this->user_salt) != $this->user_info[user_password]) { $this->is_error = 1; $this->error_message = $Application[45]; }
 		if($password != $password_confirm) { $this->is_error = 1; $this->error_message = $Application[46]; }
 		if(str_replace(" ", "", $password) != "" & strlen($password) < 6) { $this->is_error = 1; $this->error_message = $Application[47]; }
-		if(ereg('[^A-Za-z0-9]', $password)) { $this->is_error = 1; $this->error_message = $Application[48]; }
+		if(preg_match('/[^A-Za-z0-9]/', $password)) { $this->is_error = 1; $this->error_message = $Application[48]; }
 
 	}
 
@@ -421,9 +421,9 @@ class PHPS_User {
 		    } elseif($search == 1) {
 		      $var = "field_".$field_info[field_id];
 		      if(isset($_POST[$var])) { $field_value = $_POST[$var]; } elseif(isset($_GET[$var])) { $field_value = $_GET[$var]; } else { $field_value = ""; }
-		      if($field_value != "") { 
-			if($this->profile_field_query != "") { $this->profile_field_query .= " AND "; } 
-			$this->profile_field_query .= "profile_$field_info[field_id] LIKE '%$field_value%'"; 
+		      if($field_value != "") {
+			if($this->profile_field_query != "") { $this->profile_field_query .= " AND "; }
+			$this->profile_field_query .= "profile_$field_info[field_id] LIKE '%$field_value%'";
 			$this->url_string .= $var."=".urlencode($field_value)."&";
 		      }
 
@@ -484,9 +484,9 @@ class PHPS_User {
 		    } elseif($search == 1) {
 		      $var = "field_".$field_info[field_id];
 		      if(isset($_POST[$var])) { $field_value = $_POST[$var]; } elseif(isset($_GET[$var])) { $field_value = $_GET[$var]; } else { $field_value = ""; }
-	              if($field_value != "-1" & $field_value != "") { 
-			if($this->profile_field_query != "") { $this->profile_field_query .= " AND "; } 
-			$this->profile_field_query .= "profile_$field_info[field_id]='$field_value'"; 
+	              if($field_value != "-1" & $field_value != "") {
+			if($this->profile_field_query != "") { $this->profile_field_query .= " AND "; }
+			$this->profile_field_query .= "profile_$field_info[field_id]='$field_value'";
 			$this->url_string .= $var."=".urlencode($field_value)."&";
 		      }
 
@@ -511,7 +511,7 @@ class PHPS_User {
 	                $option_dependency = $option[2];
 	                $option_dependent_field_id = $option[3];
 
-	                if($option_dependency == "1") { 
+	                if($option_dependency == "1") {
 	                  $dep_field = $database->database_query("SELECT field_id, field_title, field_maxlength, field_link, field_style, field_browsable, field_required, field_regex FROM phps_fields WHERE field_id='$option_dependent_field_id' AND field_dependency='$field_info[field_id]'");
 	                  if($database->database_num_rows($dep_field) != "1") {
 	                    $dep_field_info = "";
@@ -525,7 +525,7 @@ class PHPS_User {
 	                      if($field_value == $option_id) {
 	                        $dep_profile_var = "field_".$dep_field_info[field_id];
 	                        $dep_field_value = censor($_POST[$dep_profile_var]);
-  
+
 	                        if($dep_field_info[field_required] != 0 & str_replace(" ", "", $dep_field_value) == "") {
 	                          $this->is_error = 1;
 	                          $this->error_message = $Application[38];
@@ -564,14 +564,14 @@ class PHPS_User {
 			  $field_value_profile = $option_label;
 
 			  // link field values if neccessary
-			  if($field_info[field_browsable] == 2) { 
-			    link_field_values($field_value_profile, "", Array($field_info[field_id], $option[0], "", $field_info[field_browsable])); 
+			  if($field_info[field_browsable] == 2) {
+			    link_field_values($field_value_profile, "", Array($field_info[field_id], $option[0], "", $field_info[field_browsable]));
 			    if($dep_field_value != "") { link_field_values($dep_field_value, "", Array($dep_field_info[field_id], "", $dep_field_info[field_link], $dep_field_info[field_browsable])); }
 			  }
 
 			  if($dep_field_value != "") { $field_value_profile .= " ".$dep_field_info[field_title]." ".$dep_field_value; }
 			}
-          
+
 	                // set option arrays
 	                $field_options[$num_options] = Array('option_id' => $option_id,
 								'option_label' => $option_label,
@@ -603,8 +603,8 @@ class PHPS_User {
 		      case "j F Y": case "D j F Y": case "l j F Y": $month_format = "F"; $day_format = "j"; $year_format = "Y"; $date_order = "dmy"; break;
 		      case "D-j-M-Y": case "D j M Y": case "j-M-Y": $month_format = "M"; $day_format = "j"; $year_format = "Y"; $date_order = "dmy"; break;
 		      case "Y-M-j": $month_format = "M"; $day_format = "j"; $year_format = "Y"; $date_order = "ymd"; break;
-		    }  
-  
+		    }
+
 
 	            // validate posted value
 	            if($validate == 1) {
@@ -622,13 +622,13 @@ class PHPS_User {
 	                case "ymd": $year = $field_1; $month = $field_2; $day = $field_3; break;
 	                case "dmy": $day = $field_1; $month = $field_2; $year = $field_3; break;
 	              }
-  
+
 	              // set all to blank
 	              if($month == 0 | $day == 0 | $year == 0) { $month = 0; $day = 0; $year = 0; }
 
 	              // create a timestamp
 	              $field_value = $datetime->MakeTime("0", "0", "0", "$month", "$day", "$year");
-  
+
 	              // check for required
 	              if($field_info[field_required] != 0 & $field_value == $datetime->MakeTime("0", "0", "0", "0", "0", "0")) {
 	                $this->is_error = 1;
@@ -661,15 +661,15 @@ class PHPS_User {
 
 	              $field_value = $datetime->MakeTime("0", "0", "0", "$month", "$day", "$year");
 
-		      
-	              if($field_value != $datetime->MakeTime("0", "0", "0", "0", "0", "0")) { 
-                    if($this->profile_field_query != "") { $this->profile_field_query .= " AND "; } 
-                    $this->profile_field_query .= "profile_$field_info[field_id]='$field_value'"; 
+
+	              if($field_value != $datetime->MakeTime("0", "0", "0", "0", "0", "0")) {
+                    if($this->profile_field_query != "") { $this->profile_field_query .= " AND "; }
+                    $this->profile_field_query .= "profile_$field_info[field_id]='$field_value'";
                     $this->url_string .= $var1."=".urlencode($field_1)."&";
                     $this->url_string .= $var2."=".urlencode($field_2)."&";
                     $this->url_string .= $var3."=".urlencode($field_3)."&";
                   }
-    
+
 	              if($this->profile_info != "") {
 	                $profile_column = "profile_".$field_info[field_id];
 	                $field_value = $this->profile_info[$profile_column];
@@ -690,17 +690,17 @@ class PHPS_User {
 
 		    // format value for profile
 		    if($profile == 1) {
-	   	      if($field_value != $datetime->MakeTime("0", "0", "0", "0", "0", "0")) { 
+	   	      if($field_value != $datetime->MakeTime("0", "0", "0", "0", "0", "0")) {
 	                $field_date = $datetime->MakeDate($field_value);
 			$field_time = strtotime("$field_date[1] $field_date[3] $field_date[2]");
-			$field_value_profile = $datetime->cdate($setting[setting_dateformat], $field_time); 
+			$field_value_profile = $datetime->cdate($setting[setting_dateformat], $field_time);
 			if($field_info[field_browsable] == 2) { link_field_values($field_value_profile, "", Array($field_info[field_id], $field_value, "", $field_info[field_browsable])); }
 		      }
 
 
 		    // format value for form
-	    	    } 
-	    	    
+	    	    }
+
 	              // decompose timestamp into day, month and year
 	              if($field_value != $datetime->MakeTime("0", "0", "0", "0", "0", "0")) {
 	                $field_date = $datetime->MakeDate($field_value);
@@ -718,7 +718,7 @@ class PHPS_User {
 	    					'value' => $m,
 	    					'selected' => $selected);
 	              }
-  
+
 	              // create days array
 	              $day_array = Array();
 	              $day_array[0] = Array('name' => "$Application[60]", 'value' => "0", 'selected' => "");
@@ -748,7 +748,7 @@ class PHPS_User {
 	                case "ymd": $date_array1 = $year_array; $date_array2 = $month_array; $date_array3 = $day_array; break;
 	                case "dmy": $date_array1 = $day_array; $date_array2 = $month_array; $date_array3 = $year_array; break;
 	              }
-		    
+
 	            break;
 
 	        }
@@ -760,8 +760,8 @@ class PHPS_User {
 	        $this->profile_fields_new["profile_".$field_info[field_id]] = $field_value;
 
 	        if($profile == 0 | ($profile == 1 & $field_value_profile != "")) {
-		  $this->profile_fields[] = Array('field_id' => $field_info[field_id], 
-						'field_title' => $field_info[field_title], 
+		  $this->profile_fields[] = Array('field_id' => $field_info[field_id],
+						'field_title' => $field_info[field_title],
 						'field_desc' => $field_info[field_desc],
 						'field_type' => $field_info[field_type],
 						'field_required' => $field_info[field_required],
@@ -778,20 +778,20 @@ class PHPS_User {
 		  $field_count++;
 		}
 
-	      } 
+	      }
 	    }
 
 	    // set tab array
 	    if($field_count != 0 | $tabs_only == 1) {
-	      $this->profile_tabs[] = Array('tab_id' => $tab_info[tab_id], 
-						'tab_name' => $tab_info[tab_name], 
-						'tab_o' => $tab_o, 
+	      $this->profile_tabs[] = Array('tab_id' => $tab_info[tab_id],
+						'tab_name' => $tab_info[tab_name],
+						'tab_o' => $tab_o,
 						'tab_status' => $tab_status,
 						'tab_order' => $tab_order,
 						'fields' => $this->profile_fields);
 	    }
 	  }
-	} 
+	}
 
 
 	/**
@@ -857,7 +857,7 @@ class PHPS_User {
 
 	    // subnetwork query
 	    $subnet_query = "SELECT subnet_id, subnet_name FROM phps_subnets WHERE
-	    ( 
+	    (
 	      (subnet_field1_qual='==' AND '$field1_val' LIKE REPLACE(subnet_field1_value, '*', '%')) OR
 	      (subnet_field1_qual='!=' AND '$field1_val' NOT LIKE REPLACE(subnet_field1_value, '*', '%')) OR
 	      (subnet_field1_qual='>' AND subnet_field1_value<$field1_val_num) OR
@@ -876,9 +876,9 @@ class PHPS_User {
 	    ) LIMIT 1";
 
 	    $subnet = $database->database_query($subnet_query);
-	    if($database->database_num_rows($subnet) != 0) { 
+	    if($database->database_num_rows($subnet) != 0) {
 	      $subnet_info = $database->database_fetch_assoc($subnet);
-	      $subnet_id = $subnet_info[subnet_id]; 
+	      $subnet_id = $subnet_info[subnet_id];
 	    } else {
 	      $subnet_id = 0;
 	    }
@@ -893,7 +893,7 @@ class PHPS_User {
 	  }
 
 	  return Array($subnet_id, $new_subnet, $subnet_changed, $subnet_changed_verify);
-	  
+
 	}
 
 	/**
@@ -919,9 +919,9 @@ class PHPS_User {
 	  //if(!file_exists($user_photo) | $this->user_info[user_photo] == "") { $user_photo = $nophoto_image; }
 	  if($this->user_info[user_photo] == "") { $user_photo = $nophoto_image; }
 	  return $user_photo;
-	  
+
 	}
-	
+
 	/**
 	 * Upload and return user's photo
 	 *
@@ -940,7 +940,7 @@ class PHPS_User {
 	  $file_maxheight = $this->level_info[level_photo_height];
 	  $photo_newname = "0_".rand(1000, 9999).".jpg";
 	  $file_dest = $url->url_userTdir($this->user_info[user_id]).$photo_newname;
-		
+
 	  $new_photo = new PHPS_Upload();
 	  $new_photo->new_upload($photo_name, $file_maxsize, $file_exts, $file_types, $file_maxwidth, $file_maxheight);
 
@@ -963,10 +963,10 @@ class PHPS_User {
 	      $this->user_info[user_photo] = $photo_newname;
 	    }
 	  }
-	
+
 	  $this->is_error = $new_photo->is_error;
 	  $this->error_message = $new_photo->error_message;
-	  
+
 	}
 
 	/**
@@ -1007,7 +1007,7 @@ class PHPS_User {
 	    $friend_query = "SELECT friend_id FROM phps_friends";
 
 	    // joing to friends table in needed
-	    if($user_details == 1) { 
+	    if($user_details == 1) {
 	      $friend_query .= " LEFT JOIN phps_users ON";
 	      if($direction == 1) { $friend_query .= " phps_friends.friend_user_id1=phps_users.user_id"; } else { $friend_query .= " phps_friends.friend_user_id2=phps_users.user_id"; }
 	    }
@@ -1027,7 +1027,7 @@ class PHPS_User {
 
 	  return $friend_total;
 
-	} 
+	}
 
 
 	/**
@@ -1058,7 +1058,7 @@ class PHPS_User {
 	    $friend_query .= " FROM phps_friends LEFT JOIN phps_users ON";
 
 	    if($direction == 1) { $friend_query .= " phps_friends.friend_user_id1=phps_users.user_id"; } else { $friend_query .= " phps_friends.friend_user_id2=phps_users.user_id"; }
-	
+
 	    if($friend_details == 1) { $friend_query .= " LEFT JOIN phps_friendexplains ON phps_friends.friend_id=phps_friendexplains.friendexplain_friend_id"; }
 
 	    $friend_query .= " WHERE friend_status='$friend_status'";
@@ -1099,7 +1099,7 @@ class PHPS_User {
 	  // return friends array
 	  return $friend_array;
 
-	} 
+	}
 
 
 	/**
@@ -1154,7 +1154,7 @@ class PHPS_User {
           if($database->database_num_rows($friend2) == 1 & ($setting[setting_connection_framework] == 0 | $setting[setting_connection_framework] == 2)) {
             $friendship = $database->database_fetch_assoc($friend2);
             $database->database_query("DELETE FROM phps_friends WHERE friend_id='$friendship[friend_id]'");
-            $database->database_query("DELETE FROM phps_friendexplains WHERE friendexplain_friend_id='$friendship[friend_id]'");    
+            $database->database_query("DELETE FROM phps_friendexplains WHERE friendexplain_friend_id='$friendship[friend_id]'");
           }
 
 	}
@@ -1175,7 +1175,7 @@ class PHPS_User {
 	  } else {
 	    return false;
 	  }
-	} 
+	}
 
 	/**
 	 * Returns true is the specified user has been frinded by the existing user
@@ -1208,7 +1208,7 @@ class PHPS_User {
 	  } else {
 	    return false;
 	  }
-	} 
+	}
 
 	/**
 	 * This method returns maximum privacy level viewable by a user with regard to the current user
@@ -1220,9 +1220,9 @@ class PHPS_User {
 	 */
 	public function user_privacy_max($other_user, $allowable_privacy = "012345") {
 	  global $database;
-	
+
 	  switch(TRUE) {
-	
+
 	    // nobody
 	    // no one has $privacy_level = 6
 
@@ -1235,7 +1235,7 @@ class PHPS_User {
 	    case($this->user_friended($other_user->user_info[user_id])):
 	      $privacy_level = 4;
 	      break;
-  
+
 	    // frind of a frind with sme subnetwork
 	    case($this->user_info[user_subnet_id] == $other_user->user_info[user_subnet_id] AND $this->user_friend_of_friend($other_user->user_info[user_id]) == TRUE):
 	      $privacy_level = 3;
@@ -1255,7 +1255,7 @@ class PHPS_User {
 	    default:
 	      $privacy_level = 0;
 	      break;
-	
+
 	  }
 
 	  // make sure that privacy level allowed by admin
@@ -1268,7 +1268,7 @@ class PHPS_User {
 	  // retunr privacy level
 	  return $privacy_level;
 
-	} 
+	}
 
 
 	/**
@@ -1303,7 +1303,7 @@ class PHPS_User {
 
 	  return $message_total;
 
-	} 
+	}
 
 	/**
 	 * Gets user's messages
@@ -1409,7 +1409,7 @@ class PHPS_User {
 	    if($num_outbox > $this->level_info[level_message_outbox]) {
 	      $num_delete = $num_outbox-($this->level_info[level_message_outbox]);
 	      $database->database_query("UPDATE phps_pms SET pm_outbox='0' WHERE pm_authoruser_id='".$this->user_info[user_id]."' AND pm_outbox<>'0' ORDER BY pm_id ASC LIMIT $num_delete");
-	    }      
+	    }
 
 	    // if inbox is full - delete oldest ones
 	    $total_pms = $to_user->user_message_total(0, 0);
@@ -1467,7 +1467,7 @@ class PHPS_User {
 	      $database->database_query("UPDATE phps_pms SET $setwhere_clause AND ($delete_query)");
 	      $database->database_query("DELETE FROM phps_pms WHERE pm_status='2' AND pm_outbox='0'");
 	    }
-	
+
 	  }
 
 	}
@@ -1523,7 +1523,7 @@ class PHPS_User {
 	  $profile_comments = $allowable_comments[0];
 
 	  // get subnet id
-	  $signup_subnet = $this->user_subnet_select($signup_email, $this->profile_fields_new); 
+	  $signup_subnet = $this->user_subnet_select($signup_email, $this->profile_fields_new);
 	  $signup_subnet_id = $signup_subnet[0];
 
 	  // add user to user table
@@ -1593,9 +1593,9 @@ class PHPS_User {
 	  array_pop($user_path_array);
 	  array_pop($user_path_array);
 	  $subdir = implode("/", $user_path_array)."/";
-	  if(!is_dir($subdir)) { 
-	    mkdir($subdir, 0777); 
-	    chmod($subdir, 0777); 
+	  if(!is_dir($subdir)) {
+	    mkdir($subdir, 0777);
+	    chmod($subdir, 0777);
 	    $handle = fopen($subdir."index.php", 'x+');
 	    fclose($handle);
 	  }
@@ -1641,7 +1641,7 @@ class PHPS_User {
 	  // delete related plugins objects
 	  for($g=0;$g<count($global_plugins);$g++) {
 	    if(function_exists('deleteuser_'.$global_plugins[$g])) {
-	      call_user_func_array('deleteuser_'.$global_plugins[$g], array($this->user_info[user_id])); 
+	      call_user_func_array('deleteuser_'.$global_plugins[$g], array($this->user_info[user_id]));
 	    }
 	  }
 
@@ -1681,5 +1681,5 @@ class PHPS_User {
 
 	  $this->user_clear();
 
-	} 
+	}
 }

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.14, created on 2014-06-09 18:23:07
+<?php /* Smarty version 2.6.14, created on 2014-06-10 23:43:36
          compiled from Signup.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'lower', 'Signup.tpl', 230, false),array('modifier', 'count', 'Signup.tpl', 285, false),)), $this); ?>
@@ -46,7 +46,7 @@ unset($_smarty_tpl_vars);
             <div class="submits" style="margin-left:0px !important;">
                 <label><input style="width:100px !important;" type="submit" value="<?php echo $this->_tpl_vars['Application333']; ?>
 "/></label>
-    
+
             </div>
         </form>
         <?php endif; ?>
@@ -648,8 +648,7 @@ $this->_sections['date3']['last']       = ($this->_sections['date3']['iteration'
 
                 <?php if ($this->_tpl_vars['setting']['setting_signup_code'] == 1 || $this->_tpl_vars['setting']['setting_signup_tos'] == 1 || $this->_tpl_vars['setting']['setting_signup_invite'] != 0): ?>
                 <br />
-                <div class='signup_header'><b><?php echo $this->_tpl_vars['Application363']; ?>
-</b></div>
+
                 <table cellpadding='0' cellspacing='4'  style="color:#666666;">
                     <?php endif; ?>
 
@@ -659,29 +658,6 @@ $this->_sections['date3']['last']       = ($this->_sections['date3']['iteration'
 </td>
                         <td class='form2'><input type='text' name='signup_invite' value='<?php echo $this->_tpl_vars['signup_invite']; ?>
 ' class='text' size='10' maxlength='10' style="width:95px !important;"/></td>
-                    </tr>
-                    <?php endif; ?>
-
-
-                    <?php if ($this->_tpl_vars['setting']['setting_signup_code'] == 1): ?>
-                    <tr>
-                        <td class='form1' width='100' valign="top"><?php echo $this->_tpl_vars['Application365']; ?>
-</td>
-                        <td class='form2'>
-                            <table cellpadding='0' cellspacing='0'>
-                                <tr>
-                                    <td><input type='text' name='signup_secure' class='text' size='6' maxlength='10' style="width:95px !important;"/>&nbsp;</td>
-                                    <td>
-                                        <table cellpadding='0' cellspacing='0'>
-                                            <tr>
-                                                <td><img src='./images/secure.php' border='0' height='20' width='67' class='signup_code'/>&nbsp;&nbsp;</td>
-                                                <td></td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
                     </tr>
                     <?php endif; ?>
 

@@ -30,7 +30,7 @@
             <p class="line">&nbsp;</p>
             <div class="submits" style="margin-left:0px !important;">
                 <label><input style="width:100px !important;" type="submit" value="{$Application333}"/></label>
-    
+
             </div>
         </form>
         {/if}
@@ -330,7 +330,7 @@
 
                 {if $setting.setting_signup_code == 1 OR $setting.setting_signup_tos == 1 OR $setting.setting_signup_invite != 0}
                 <br />
-                <div class='signup_header'><b>{$Application363}</b></div>
+
                 <table cellpadding='0' cellspacing='4'  style="color:#666666;">
                     {/if}
 
@@ -338,28 +338,6 @@
                     <tr>
                         <td class='form1' width='100' valign="top">{$Application364}</td>
                         <td class='form2'><input type='text' name='signup_invite' value='{$signup_invite}' class='text' size='10' maxlength='10' style="width:95px !important;"/></td>
-                    </tr>
-                    {/if}
-
-
-                    {if $setting.setting_signup_code == 1}
-                    <tr>
-                        <td class='form1' width='100' valign="top">{$Application365}</td>
-                        <td class='form2'>
-                            <table cellpadding='0' cellspacing='0'>
-                                <tr>
-                                    <td><input type='text' name='signup_secure' class='text' size='6' maxlength='10' style="width:95px !important;"/>&nbsp;</td>
-                                    <td>
-                                        <table cellpadding='0' cellspacing='0'>
-                                            <tr>
-                                                <td><img src='./images/secure.php' border='0' height='20' width='67' class='signup_code'/>&nbsp;&nbsp;</td>
-                                                <td></td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
                     </tr>
                     {/if}
 

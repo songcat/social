@@ -37,7 +37,6 @@ if ($user->user_info['user_id'] == $owner->user_info['user_id'] && $task == "sta
     if(str_replace(" ", "", $_GET['status']) != "") {
         $actions->add($user, "editstatus", Array('[username]', '[status]'), Array($user->user_info[user_username], str_replace("&", "&amp;", $_GET['status'])), 600);
     }
-    
     exit();
 }
 
@@ -51,7 +50,6 @@ if ($user->user_info['user_id'] == $owner->user_info['user_id'] && $task == "pro
 
     // INSERT ACTION
     $actions->add($user, "editprofile", Array('[username]'), Array($user->user_info[user_username]), 1800);
-    
     exit();
 }
 
@@ -68,25 +66,12 @@ if($is_profile_private == 0) {
 // get profile fields
 $owner->user_fields(0, 0, 0, 0, 1);
 
-// get profile comments
-$comment = new PHPS_Comment('profile', 'user_id', $owner->user_info[user_id]);
-$total_comments = $comment->comment_total();
-if ($total_comments > $p*10) $p = 1;
-$comments = $comment->comment_list(($p-1)*10, 10);
-
 // get friends list
 $friends = $owner->user_friend_list(0, 6, 0, 1, "RAND()");
 $total_friends = $owner->user_friend_total(0);
 
-// check if user is allowed to comment
-$allowed_to_comment = 1;
-$comment_level = $owner->user_privacy_max($user, $owner->level_info[level_profile_comments]);
-$allowed_comment = true_privacy($owner->user_info[user_privacy_comments], $owner->level_info[level_profile_comments]);
-if($comment_level < $allowed_comment) { $allowed_to_comment = 0; }
-
-
-if($owner->level_info[level_profile_style] != 0 && $is_profile_private == 0) { 
-  $profilestyle_info = $database->database_fetch_assoc($database->database_query("SELECT profilestyle_css FROM phps_profilestyles WHERE profilestyle_user_id='".$owner->user_info[user_id]."' LIMIT 1")); 
+if($owner->level_info[level_profile_style] != 0 && $is_profile_private == 0) {
+  $profilestyle_info = $database->database_fetch_assoc($database->database_query("SELECT profilestyle_css FROM phps_profilestyles WHERE profilestyle_user_id='".$owner->user_info[user_id]."' LIMIT 1"));
   $global_css = $profilestyle_info[profilestyle_css];
 }
 
@@ -122,10 +107,7 @@ $actions_total = count($actions);
 
 
 if ($p > 1) $smarty->assign('prev', $p-1);
-if ($total_comments > ($p*10)) $smarty->assign('next', $p+1);
 $smarty->assign('tabs', $owner->profile_tabs);
-$smarty->assign('comments', $comments);
-$smarty->assign('total_comments', (int)$total_comments);
 $smarty->assign('friends', $friends);
 $smarty->assign('total_friends', $total_friends);
 $smarty->assign('friend_ofs', $friend_ofs);
@@ -134,7 +116,6 @@ $smarty->assign('is_friend', $is_friend);
 $smarty->assign('friendship_allowed', $friendship_allowed);
 $smarty->assign('is_profile_private', $is_profile_private);
 $smarty->assign('is_online', $is_online);
-$smarty->assign('allowed_to_comment', $allowed_to_comment);
 $smarty->assign('total_views', $profile_views);
 $smarty->assign('actions', $actions);
 $smarty->assign('actions_total', $actions_total);

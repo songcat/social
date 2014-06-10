@@ -9,12 +9,12 @@
   * @email: dan@rootcube.com
   * @license: GNU General Public License (GPL)
   */
-  
+
 // CHECK IF CLASS EXISTS FIRST
 if(class_exists('PHPS_InputFilter')) return;
 
 class PHPS_InputFilter {
-  
+
   public $tagsArray;			// default = empty array
 
   public $attrArray;			// default = empty array
@@ -29,8 +29,8 @@ class PHPS_InputFilter {
   public $tagBlacklist = array('applet', 'body', 'bgsound', 'base', 'basefont', 'frame', 'frameset', 'head', 'html', 'id', 'iframe', 'ilayer', 'layer', 'link', 'meta', 'name', 'script', 'style', 'title', 'xml');
 
   public $attrBlacklist = array('action', 'background', 'codebase', 'dynsrc', 'lowsrc');  // also will strip ALL event handlers
-    
-  /** 
+
+  /**
     * Constructor for inputFilter class. Only first parameter is required.
     * @access constructor
     * @param Array $tagsArray - list of user-defined tags
@@ -50,8 +50,8 @@ class PHPS_InputFilter {
     $this->attrMethod = $attrMethod;
     $this->xssAuto = $xssAuto;
   }
-  
-  /** 
+
+  /**
     * Method to be called by another php script. Processes for XSS and specified bad code.
     * @access public
     * @param Mixed $source - input string/array-of-string to be 'cleaned'
@@ -70,10 +70,10 @@ class PHPS_InputFilter {
       // filter source for XSS and other 'bad' code etc.
       return $this->remove($this->decode($source));
     // return parameter as given
-    } else return $source;	
+    } else return $source;
   }
 
-  /** 
+  /**
     * Internal method to iteratively remove all unwanted tags and attributes
     * @access protected
     * @param String $source - input string to be 'cleaned'
@@ -87,9 +87,9 @@ class PHPS_InputFilter {
       $loopCounter++;
     }
     return $source;
-  }	
-  
-  /** 
+  }
+
+  /**
     * Internal method to strip a string of certain tags
     * @access protected
     * @param String $source - input string to be 'cleaned'
@@ -117,13 +117,13 @@ class PHPS_InputFilter {
         $postTag = substr($postTag, ($tagOpen_nested+1));
         $tagOpen_start = strpos($postTag, '<');
         continue;
-      } 
+      }
       $tagOpen_nested = (strpos($fromTagOpen, '<') + $tagOpen_start + 1);
       $currentTag = substr($fromTagOpen, 0, $tagOpen_end);
       $tagLength = strlen($currentTag);
       if (!$tagOpen_end) {
         $preTag .= $postTag;
-        $tagOpen_start = strpos($postTag, '<');			
+        $tagOpen_start = strpos($postTag, '<');
       }
       // iterate through tag finding attribute pairs - setup
       $tagLeft = $currentTag;
@@ -139,9 +139,9 @@ class PHPS_InputFilter {
       } else {
         $isCloseTag = FALSE;
         list($tagName) = explode(' ', $currentTag);
-      }		
+      }
       // excludes all "non-regular" tagnames OR no tagname OR remove if xssauto is on and tag is blacklisted
-      if ((!preg_match("/^[a-z][a-z0-9]*$/i",$tagName)) || (!$tagName) || ((in_array(strtolower($tagName), $this->tagBlacklist)) && ($this->xssAuto))) { 				
+      if ((!preg_match("/^[a-z][a-z0-9]*$/i",$tagName)) || (!$tagName) || ((in_array(strtolower($tagName), $this->tagBlacklist)) && ($this->xssAuto))) {
         $postTag = substr($postTag, ($tagLength + 2));
         $tagOpen_start = strpos($postTag, '<');
         // don't append this tag
@@ -174,7 +174,7 @@ class PHPS_InputFilter {
       }
 
       // appears in array specified by user
-      $tagFound = in_array(strtolower($tagName), $this->tagsArray);			
+      $tagFound = in_array(strtolower($tagName), $this->tagsArray);
       // remove this tag on condition
       if ((!$tagFound && $this->tagsMethod) || ($tagFound && !$this->tagsMethod)) {
         // reconstruct tag with allowed attributes
@@ -191,20 +191,20 @@ class PHPS_InputFilter {
       }
       // find next tag's start
       $postTag = substr($postTag, ($tagLength + 2));
-      $tagOpen_start = strpos($postTag, '<');			
+      $tagOpen_start = strpos($postTag, '<');
     }
     // append any code after end of tags
     $preTag .= $postTag;
     return $preTag;
   }
 
-  /** 
+  /**
     * Internal method to strip a tag of certain attributes
     * @access protected
     * @param Array $attrSet
     * @return Array $newSet
     */
-  function filterAttr($attrSet) {	
+  function filterAttr($attrSet) {
     $newSet = array();
     // process attributes
     for ($i = 0; $i <count($attrSet); $i++) {
@@ -215,7 +215,7 @@ class PHPS_InputFilter {
       $attrSubSet = explode('=', trim($attrSet[$i]), 2);
       list($attrSubSet[0]) = explode(' ', $attrSubSet[0]);
       // removes all "non-regular" attr names AND also attr blacklisted
-      if ((!eregi("^[a-z]*$",$attrSubSet[0])) || (($this->xssAuto) && ((in_array(strtolower($attrSubSet[0]), $this->attrBlacklist)) || (substr($attrSubSet[0], 0, 2) == 'on')))) 
+      if ((!eregi("^[a-z]*$",$attrSubSet[0])) || (($this->xssAuto) && ((in_array(strtolower($attrSubSet[0]), $this->attrBlacklist)) || (substr($attrSubSet[0], 0, 2) == 'on'))))
         continue;
       // xss attr value filtering
       if ($attrSubSet[1]) {
@@ -238,7 +238,7 @@ class PHPS_InputFilter {
           (strpos(strtolower($attrSubSet[1]), 'behaviour:') !== false) ||
           (strpos(strtolower($attrSubSet[1]), 'vbscript:') !== false) ||
           (strpos(strtolower($attrSubSet[1]), 'mocha:') !== false) ||
-          (strpos(strtolower($attrSubSet[1]), 'livescript:') !== false) 
+          (strpos(strtolower($attrSubSet[1]), 'livescript:') !== false)
       ) continue;
 
       // if matches user defined array
@@ -251,12 +251,12 @@ class PHPS_InputFilter {
         else if ($attrSubSet[1] == "0") $newSet[] = $attrSubSet[0] . '="0"';
         // reformat single attributes to XHTML
         else $newSet[] = $attrSubSet[0] . '="' . $attrSubSet[0] . '"';
-      }	
+      }
     }
     return $newSet;
   }
-  
-  /** 
+
+  /**
     * Try to convert to plaintext
     * @access protected
     * @param String $source
@@ -266,13 +266,13 @@ class PHPS_InputFilter {
     // url decode
     $source = html_entity_decode($source, ENT_QUOTES, "ISO-8859-1");
     // convert decimal
-    $source = preg_replace('/&#(\d+);/me',"chr(\\1)", $source);				// decimal notation
+    $source = preg_replace_callback('/&#(\d+);/me',function($m){return chr($m[1]);}, $source);				// decimal notation
     // convert hex
     $source = preg_replace('/&#x([a-f0-9]+);/mei',"chr(0x\\1)", $source);	// hex notation
     return $source;
   }
 
-  /** 
+  /**
     * Method to be called by another php script. Processes for SQL injection
     * @access public
     * @param Mixed $source - input string/array-of-string to be 'cleaned'
@@ -291,10 +291,10 @@ class PHPS_InputFilter {
       // filter source for SQL injection
       if (is_string($source)) return $this->quoteSmart($this->decode($source), $connection);
     // return parameter as given
-    } else return $source;	
+    } else return $source;
   }
 
-  /** 
+  /**
     * @author Chris Tobin
     * @author Daniel Morris
     * @access protected
@@ -309,15 +309,15 @@ class PHPS_InputFilter {
     $source = $this->escapeString($source, $connection);
     return $source;
   }
-  
-  /** 
+
+  /**
     * @author Chris Tobin
     * @author Daniel Morris
     * @access protected
     * @param String $source
     * @param Resource $connection - An open MySQL connection
     * @return String $source
-    */	
+    */
   function escapeString($string, &$connection) {
     // depreciated function
     if (version_compare(phpversion(),"4.3.0", "<")) mysql_escape_string($string);
