@@ -1,9 +1,9 @@
-<?php /* Smarty version 2.6.14, created on 2014-06-09 18:01:01
+<?php /* Smarty version 2.6.14, created on 2014-06-11 00:54:02
          compiled from Header.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'array', 'Header.tpl', 43, false),)), $this); ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/DTD/strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE>
+<html>
 <head>
     <title><?php echo $this->_tpl_vars['global_page_title']; ?>
 </title>
@@ -13,7 +13,7 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'array', 'He
 
     <link href="templates/reset_client.css" rel="stylesheet" type="text/css" />
     <link href="templates/main_client.css" rel="stylesheet" type="text/css" />
-	
+
     <script type="text/javascript" src="include/js/jquery-1.3.2.min.js"></script>
 	<script type="text/javascript" src="include/js/jquery-ui-1.7.2.custom.min.js"></script>
 	<script src="include/js/jquery.easing.1.3.js" type="text/javascript"></script>
@@ -81,11 +81,11 @@ unset($_smarty_tpl_vars);
     <?php endfor; endif; ?>
     <?php echo smarty_function_array(array('var' => 'global_plugin_menu','value' => ''), $this);?>
 
-    
+
 </head>
 <body>
-<div id="container">
-<div id="header">
+
+<header>
     <div id="quickSearch">
         <form action='Search.php' method='get'>
             <div id="qquery">
@@ -141,7 +141,7 @@ s</a></li>
         </form>
     </div>
 
- 
+
 
     <a href="/" id="logo"></a>
     <ul id="nav">
@@ -171,8 +171,8 @@ s</a></li>
         <li class="cat_item"><a href="Home.php"><?php echo $this->_tpl_vars['Application3']; ?>
 </a><span>|</span></li>
     </ul>
-</div>
-
+</header>
+<div id="container" class="clearfix">
 <div id="wrapper">
 <?php if ($this->_tpl_vars['ads']->ad_top != ""): ?><div class='ad_top' style='display: block; visibility: visible;text-align: center;float:right;padding:5px;'><?php echo $this->_tpl_vars['ads']->ad_top; ?>
 </div><?php endif; ?>

@@ -58,7 +58,7 @@ h3 a, h3 {
 
 
 /*-------------------header--------------------*/
-#header {
+header {
 	width:100%;
 	height:61px;
 	padding:0px 0px 0 0px;
@@ -88,7 +88,7 @@ h3 a, h3 {
 #wrapper {
 	width:830px;
 	overflow:auto;
-	padding:20px 0 0px 0; 
+	padding:20px 0 0px 0;
 	clear:both;
 }
 
@@ -102,7 +102,7 @@ html* #wrapper {
 	width:829px;
 	padding:0px 0px 0px 0px;
 	margin:0 0px 0 0px;
-	background:url(../images/content-bg.gif) repeat-y;	
+	background:url(../images/content-bg.gif) repeat-y;
 
 }
 .block-bot {
@@ -131,7 +131,7 @@ html* #wrapper {
 	background-color:#ddebf0;
 	margin:5px 1px 15px;
 	padding:5px 0px 5px 20px;
-	
+
 	height:40px;
 	border:1px solid #cbd0d2;
 	border-width:1px 0;
@@ -145,7 +145,7 @@ html* #wrapper {
 }
 .row-blue form label {
 	color:#666;
-	padding-left:8px;	
+	padding-left:8px;
 
 }
 .row-blue input  {
@@ -177,9 +177,9 @@ html* #wrapper {
 html* .row-blue input  {
 	margin:-0px -20px 0 0;
 }
-*html .row-blue .img-button input { 
+*html .row-blue .img-button input {
 	margin-right:-20px;
-	
+
 }
 *html .row-blue .img-button {
 	margin-right:0px;
@@ -289,7 +289,7 @@ a.blue {
 	display:block;
 	color:#fff;
 	background:url(../images/button.gif) no-repeat left;
-	height:23px; 
+	height:23px;
 	float:left;
 	font-weight:bold;
 	line-height:23px;
@@ -362,7 +362,7 @@ table.view-users th label {
 
 table.view-users .col-l {
 	border-right:1px solid #01719a;
-	
+
 }
 table.view-users th.col-f {
 	background:url(../images/th-f.gif) no-repeat left;
@@ -385,7 +385,7 @@ table.view-users td {
  	margin-bottom:6px;
 	vertical-align:bottom;
  }
- 
+
 html* table.view-users td .t-input {
 	 margin-top:-5px;
 	 height:15px;
@@ -455,9 +455,9 @@ html* table.view-users td .t-input {
 	padding:0px 10px 0 10px;
 	margin:0px 0 0px;
 	overflow:hidden;
-	
+
 	width:809px;
-	
+
 }
 .list01-top li{
 	float:left;
@@ -597,7 +597,7 @@ not all and (-webkit-min-device-pixel-ratio:0) { .block-in input {
 	border:1px solid #cbd0d2;
 }*/
 /*------------------footer------------------*/
-#footer {
+footer {
 	height:140px;
 	margin:0 auto;
 	width:809px;
@@ -606,7 +606,7 @@ not all and (-webkit-min-device-pixel-ratio:0) { .block-in input {
 
 }
 
-#footer p, #footer a {
+footer p, footer a {
 	font-size:12px;
 	padding:0px 0px 0 0px;
 	line-height:20px;
@@ -614,12 +614,12 @@ not all and (-webkit-min-device-pixel-ratio:0) { .block-in input {
 	text-decoration:none;
 }
 
-#footer a:hover {
+footer a:hover {
 	color:#1288c1;
 	text-decoration:underline;
 	}
-	
-	
+
+
 
 
 /* AM 2009-10-29 */

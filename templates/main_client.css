@@ -82,7 +82,7 @@ h4{
 	line-height:20px;
 }
 
-div#quickSearch {float:right; text-align:right; padding:22px 9px 0px 0px; margin:0px 0px; 
+div#quickSearch {float:right; text-align:right; padding:22px 9px 0px 0px; margin:0px 0px;
 right:0;}
 #quickSearch input { border:1px solid #fff; height:15px; line-height:18px; width:90px; float:left; padding-top:1px;}
 html* #quickSearch input {
@@ -94,7 +94,7 @@ html* #quickSearch input {
 
 .inputSearch {
  background: white url(/images/magglass.png) no-repeat 3px 4px;
-} 
+}
 #qquery {
 	width:110px !important;
 	border:1px solid #5f686e;
@@ -170,7 +170,7 @@ border-top:1px solid #CCD5DD;
 }
 
 .dayHead {
- color: #333; 
+ color: #333;
  height:1.6em;
  font-weight: normal;
  text-align: center;
@@ -249,9 +249,9 @@ height:82px;
  margin: 5px;
 }
 .rightArrow a, .leftArrow a {
- border: 1px solid #d0d0d0; 
+ border: 1px solid #d0d0d0;
  line-height:25px;
- background-color:#fff; 
+ background-color:#fff;
  padding:0px 6px 3px 6px;
 }
 .rightArrow a:hover, .leftArrow a:hover {
@@ -259,7 +259,7 @@ height:82px;
  border: 1px solid #d0d0d0;
 }
 .calPic {
- text-align:center; 
+ text-align:center;
  margin: -8px 0px 4px 5px;
 }
 
@@ -307,7 +307,7 @@ height:82px;
  padding: 15px 5px 5px 10px;
  border-left: 1px solid #d0d0d0;
  background-color: #fbfbfb;
-} 
+}
 
 #content .link-btn {
 	color:#fff;
@@ -337,7 +337,6 @@ height:82px;
 	height:60px;
 	display:block;
 	margin:0 0px 0 0px;
-	background:url(../images/PHPsocial-front.png) no-repeat;
 	cursor:pointer;
 }
 
@@ -345,7 +344,6 @@ height:82px;
 	float:right;
 	width:195px;
 	height:23px;
-	background:url(../images/PHPsocialAdminBlue.png) no-repeat;
 	margin-top:20px;
 }
 /*---------------------------------------nav------------------------------------------*/
@@ -354,7 +352,7 @@ height:82px;
 	height:60px;
 	padding:0 0px 0px 0px;
 	margin:0px 0 0 05px;
-	list-style:none; 
+	list-style:none;
 	width:500px;
 	float:right;
 	color:#fff;
@@ -373,13 +371,13 @@ height:82px;
 	width:auto;
 	margin:0 0px 0 0px;
 	padding: 21px 0 20px 0px;
-	line-height:20px; 
+	line-height:20px;
 	display:inline;
 }
 
 #nav li a {
-	line-height:20px; 
-	text-decoration:none; 
+	line-height:20px;
+	text-decoration:none;
 	cursor:pointer;
 	color:#fff;
 	font-size:12px;
@@ -394,7 +392,7 @@ height:82px;
 
 #wrapper {
 	width:828px;
-	padding:20px 0 0px 0; 
+	padding:20px 0 0px 0;
 	clear:both;
 }
 html* #wrapper{
@@ -433,7 +431,7 @@ html* .main-post {
 }
 *html .main-post2 {
 	height:280px;
-	
+
 }
 /*------------------sidebar---------------*/
 #sidebar{
@@ -504,9 +502,9 @@ html* .main-post {
 	height:5px;
 	display:block;
 	background:url(../images/bot-blue.gif) no-repeat 0 100%;
-	clear:both;	
+	clear:both;
 	line-height:1px;
-	margin-top:0; 
+	margin-top:0;
 }
 *html .blue-bot,*html #sidebar .block-bot {
 	margin-top:-10px; border:1px solid#f0f;
@@ -554,7 +552,7 @@ ul.accordion li a.opener,  ul.accordion li a.opener:hover{
 
 	background:url(../images/form-a-unactive.gif) no-repeat 12px center;
 	display:block;
-	
+
 }
 
  ul.accordion li a.active,  ul.accordion li a.active:hover {
@@ -610,7 +608,7 @@ html* #sidebar .slide .user{
 	border:1px solid #cbd0d2;
 	margin:5px 0;
 	color:#333;
-	
+
 }
 #sidebar .side-form input {
 	margin:0 10px 0px 0;
@@ -676,7 +674,7 @@ ul.accordion li .user a, ul.accordion li .user a:hover, ul.accordion li .album a
 .settings {
 	margin:20px 20px 0;
 	padding-bottom:10px;
-	
+
 }
 .line {
 	border-bottom:1px solid #dfe2e2;
@@ -903,13 +901,13 @@ ul.accordion li .post a {
 	float:right;
 	display:inline;
 	margin:0 0px 0 0px;
-	background:url(../images/content-bg.gif) repeat-y;	
+	background:url(../images/content-bg.gif) repeat-y;
 
 }
 .wrapper2 {
 	width:829px !important;
 }
-.wrapper2 #content {	
+.wrapper2 #content {
 	width:829px ;
 	background:#fff;
 }
@@ -980,7 +978,7 @@ ul.accordion li .post a {
 	display:block;
 	color:#fff;
 	background:url(../images/button.gif) no-repeat left;
-	height:23px; 
+	height:23px;
 	float:left;
 	font-weight:bold;
 	line-height:23px;
@@ -1027,7 +1025,7 @@ ul.accordion li .post a {
 .new-friends .f-left .img{
 	margin-bottom:10px;
 }
-#sidebar form.check input{ 
+#sidebar form.check input{
 	clear:left;
 	float:left;
 	border:none;
@@ -1114,7 +1112,7 @@ ul.accordion li .post a {
 /*	width:465px;
 */	list-style:none outside none;
 	padding:0 0 0 10px;
-	
+
 	margin:0px 0 0px;
 	overflow:hidden;
 }
@@ -1150,7 +1148,7 @@ a.f-left .img {
 	margin:0 15px 0px 5px;
 }
 
- 
+
 .row .f-right {
 	text-align:right;
 	padding-left:10px;
@@ -1188,7 +1186,7 @@ a.f-left .img {
 	overflow:hidden;
 	background:url(../images/list02-bg.gif) repeat-x bottom;
 	width:809px;
-	
+
 }
 .list02 li{
 	float:left;
@@ -1224,9 +1222,9 @@ a.f-left .img {
 	padding:0px 10px 0 10px;
 	margin:0px 0 0px;
 	overflow:hidden;
-	
+
 	width:809px;
-	
+
 }
 .list02-top li{
 	float:left;
@@ -1278,7 +1276,7 @@ form.login label.registr input:hover, form.login label.registr:hover input{
 }
 form.login label.button, form.login a.button {
 	padding:0 0 0 0px;
-	height:23px; 
+	height:23px;
 	float:left;
 	font-weight:bold;
 	line-height:23px;
@@ -1290,7 +1288,7 @@ form.login a.button span {
 	padding:0;
 	width:69px;
 }
-*html #sidebar form.login .button input { 
+*html #sidebar form.login .button input {
 	width:50px;
 	float:right;
 	padding:0;
@@ -1542,8 +1540,8 @@ div.user {
 
 /* STYLES FOR FRIEND SUGGEST FEATURE */
 .suggest_item a {
-	padding: 3px 3px 3px 5px; 
-	background: #F7F7F7; 
+	padding: 3px 3px 3px 5px;
+	background: #F7F7F7;
 	border-bottom: 1px solid #CCCCCC;
 	width: 181;
 	display: block;
@@ -1553,13 +1551,13 @@ div.user {
 	color: #FFFFFF;
 }
 div.suggest {
-	position: absolute; 
-	background-color: #FFFFFF; 
-	text-align: left; 
+	position: absolute;
+	background-color: #FFFFFF;
+	text-align: left;
 	border: 1px solid #AAAAAA;
 	padding: 0px;
 	display: none;
-} 
+}
 a.suggest:link { color: #555555; text-decoration: none; }
 a.suggest:visited { color: #555555; text-decoration: none; }
 a.suggest:hover { color: #FFFFFF; text-decoration: none; }
@@ -1623,7 +1621,7 @@ a.suggest:hover { color: #FFFFFF; text-decoration: none; }
 }
 
 .pfl {
-    float: left; 
+    float: left;
     margin-left: 15px;
 }
 
@@ -1644,7 +1642,7 @@ a.suggest:hover { color: #FFFFFF; text-decoration: none; }
     *width: 100px;
 }
 
-#sidebar_right{ 
+#sidebar_right{
 	display: inline;
 	float: right;
 	height: auto;
@@ -1653,8 +1651,34 @@ a.suggest:hover { color: #FFFFFF; text-decoration: none; }
 	width: 182px;
 	left:1055px;
 	position:absolute;
-}	
+}
 
 #myphoto {
 	max-width:600px;
+}
+
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.clearfix {
+    display: inline-block;
+}
+
+html[xmlns] .clearfix {
+    display: block;
+}
+
+* html .clearfix {
+    height: 1%;
+}
+
+header {
+	height: 61px;
 }

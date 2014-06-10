@@ -1,5 +1,5 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/DTD/strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE>
+<html>
 <head>
     <title>{$global_page_title}</title>
     <base href='{$baseurl}' />
@@ -7,7 +7,7 @@
 
     <link href="templates/reset_client.css" rel="stylesheet" type="text/css" />
     <link href="templates/main_client.css" rel="stylesheet" type="text/css" />
-	
+
     <script type="text/javascript" src="include/js/jquery-1.3.2.min.js"></script>
 	<script type="text/javascript" src="include/js/jquery-ui-1.7.2.custom.min.js"></script>
 	<script src="include/js/jquery.easing.1.3.js" type="text/javascript"></script>
@@ -41,11 +41,11 @@
         {/if}
     {/section}
     {array var="global_plugin_menu" value=''}
-    
+
 </head>
 <body>
-<div id="container">
-<div id="header">
+
+<header>
     <div id="quickSearch">
         <form action='Search.php' method='get'>
             <div id="qquery">
@@ -72,7 +72,7 @@
         </form>
     </div>
 
- 
+
 
     <a href="/" id="logo"></a>
     <ul id="nav">
@@ -96,8 +96,8 @@
         <li class="cat_item"><a href="Search.php">{$Application4}</a><span>|</span></li>
         <li class="cat_item"><a href="Home.php">{$Application3}</a><span>|</span></li>
     </ul>
-</div>
-
+</header>
+<div id="container" class="clearfix">
 {* BEGIN PAGE CONTENT *}
 <div id="wrapper">
 {if $ads->ad_top != ""}<div class='ad_top' style='display: block; visibility: visible;text-align: center;float:right;padding:5px;'>{$ads->ad_top}</div>{/if}
