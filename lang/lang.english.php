@@ -420,7 +420,7 @@ $Application[70] = "'s Profile";
 	$Application[356] = "Password Again:";
 	$Application[357] = "Enter your password again for confirmation.";
 	$Application[358] = "Account Information";
-	$Application[359] = "Username:";
+	$Application[359] = "Last Name:";
 	$Application[360] = "This is the name others see when they view your profile. If you decide to change your username, you must enter one that has not already been taken by another person.";
 	$Application[361] = "This will be the name people see when they view your profile.";
 	$Application[362] = "Timezone:";
@@ -431,7 +431,7 @@ $Application[70] = "'s Profile";
 	$Application[367] = "I have read and agree to the <a href='HelpTos.php' target='_blank'>terms of service</a>.";
 	$Application[739] = "Phone";
 //	break;
-	
+
 //  case "SignupVerify":
 	$Application[368] = "Another user has already taken this email address.";
 	$Application[369] = "There is no user in the system with that email address. Please <a href='Home.php'>click here</a> to return to the home page.";

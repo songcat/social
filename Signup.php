@@ -64,7 +64,7 @@ if($task == "step1do") {
 	$signup_password = $_POST['signup_password'];
 	$signup_password2 = $_POST['signup_password2'];
 	$signup_username = $_POST['signup_username'];
-	$signup_timezone = $_POST['signup_timezone'];
+	$signup_timezone = 1;
 	$signup_invite = $_POST['signup_invite'];
 	$signup_phone = $_POST['signup_phone'];
 
@@ -244,19 +244,12 @@ if($task == "step4") {
   $step = 4;
 }
 
-
-
-
 // SHOW FOURTH STEP
 if($task == "step3") {
   $step = 3;
   $next_task = "step3do";
   if($setting[setting_signup_invitepage] == 0) { $task = "step2"; }
 }
-
-
-
-
 
 // show third step
 if($task == "step2") {
@@ -265,8 +258,6 @@ if($task == "step2") {
   if($setting[setting_signup_invitepage] == 0) { $last_task = "step4"; } else { $last_task = "step3"; }
   if($setting[setting_signup_photo] == 0) { $task = "step1"; }
 }
-
-
 
 // show first step
 if($task == "step1") {
@@ -291,13 +282,6 @@ if($task == "step1") {
 	}
 }
 
-
-// set default timezone
-if(!isset($signup_timezone)) {
-	$signup_timezone = $setting['setting_timezone'];
-}
-
-
 // assign variables and include footer
 $smarty->assign('error_message', $error_message);
 $smarty->assign('new_user', $new_user);
@@ -307,7 +291,6 @@ $smarty->assign('signup_phone', $signup_phone);
 $smarty->assign('signup_password', $signup_password);
 $smarty->assign('signup_password2', $signup_password2);
 $smarty->assign('signup_username', $signup_username);
-$smarty->assign('signup_timezone', $signup_timezone);
 $smarty->assign('signup_lang', $signup_lang);
 $smarty->assign('signup_invite', $signup_invite);
 $smarty->assign('signup_agree', $signup_agree);

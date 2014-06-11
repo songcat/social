@@ -54,7 +54,7 @@ class PHPS_Database {
 
 	// Database query returning all rows in an array
     public function get_all($query)
-	{
+	  {
         if (!($res = $this->database_connection->query($query)) and $this->get_errors)
             echo "Database error: ".$this->database_connection->error()."<br/>In query: ".$query;
         while ($result[] = $res->fetch_assoc()) {}

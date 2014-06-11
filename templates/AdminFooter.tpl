@@ -6,7 +6,7 @@
 </div>
 <div id="footer">
 
-    <p><a href="http://phpsocial.com/">PhpSocial</a> &copy; 2006-2009</p>
+    <p>Footer</p>
 </div>
 </div>
 </body>
